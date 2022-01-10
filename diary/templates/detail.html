@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="d-flex justify-content-center align-items-center">
+  <div class="card" style="width: 35%">
+    {% if post.photo %}
+    <img src="{{post.photo.url}}" class="card-img-top" alt="imgae" />
+    {% else %}
+    <img
+      src="{% static 'images/blank.jpeg' %}"
+      class="card-img-top"
+      alt="image"
+    />
+    {% endif %}
+    <div class="card-body">
+      <h5 class="card-title">{{post.title}}</h5>
+      <p class="card-text">{{post.contexts}}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

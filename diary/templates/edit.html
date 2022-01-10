@@ -1,0 +1,60 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="d-flex justify-content-center align-items-center">
+  <div class="card" style="width: 25%">
+    {% if post.photo %}
+    <img src="{{post.photo.url}}" class="card-img-top" alt="image" />
+    {% else %}
+    <img
+      src="{% static 'images/blank.jpeg' %}"
+      class="card-img-top"
+      alt="image"
+    />
+    {% endif %}
+    <div class="card-body">
+      <form
+        action="{% url 'update' post.id %}"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <div class="input-group flex-nowrap mb-3">
+          <span class="input-group-text" id="addon-wrapping">제목</span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="title"
+            aria-label="title"
+            aria-describedby="addon-wrapping"
+            value="{{post.title}}"
+            name="title"
+          />
+        </div>
+        <div class="input-group flex-nowrap mb-3">
+          <span class="input-group-text" id="addon-wrapping">내용</span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="context"
+            aria-label="context"
+            aria-describedby="addon-wrapping"
+            value="{{post.contexts}}"
+            name="body"
+          />
+        </div>
+        <input
+          class="form-control mb-3"
+          type="file"
+          id="formFile"
+          name="photo"
+        />
+        <div class="d-flex justify-content-end w-100">
+          <button type="submit" class="btn btn-primary w-100">수정하기</button>
+        </div>
+      </form>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Last updated 3 mins ago</small>
+    </div>
+  </div>
+</div>
+{% endblock %}
